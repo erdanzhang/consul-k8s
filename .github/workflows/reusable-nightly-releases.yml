@@ -171,7 +171,7 @@ jobs:
           tags: docker.io/hashicorppreview/${{ env.repo }}-control-plane:${{ env.version }}-${{ inputs.name }}-${{ github.sha }}
 
   acceptance:
-    needs: [ get-product-version, dev-upload-docker ]
+    needs: [ get-product-version, dev-upload-docker, get-go-version ]
     runs-on: [custom, linux, xl]
     strategy:
       matrix:
@@ -198,7 +198,7 @@ jobs:
       - name: Setup go
         uses: actions/setup-go@v3
         with:
-          go-version: ${{ inputs.go-version }}
+          go-version: ${{ needs.get-go-version.outputs.go-version }}
 
       - name: Setup go mod cache
         uses: actions/cache@v3

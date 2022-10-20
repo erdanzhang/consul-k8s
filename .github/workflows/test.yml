@@ -1,6 +1,7 @@
 name: test
 on:
-  push:
+  schedule:
+    - cron: "0 0 * * *" # to debug on non main branch, replace schedule and chron with just push
 
 env:
   TEST_RESULTS: /tmp/test-results # path to where test results are saved
