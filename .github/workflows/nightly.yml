@@ -11,7 +11,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - { runner: "0", consul-k8s-branch: "release/0.49.x", build-name: "kind-nightly-49", consul-version: "1.13-dev", kind-version: "v1.23.0" }
+          - { runner: "0", consul-k8s-branch: "v0.49.0", build-name: "kind-nightly-49", consul-version: "1.13-dev", kind-version: "v1.23.0" }
+#          - { runner: "0", consul-k8s-branch: "main", build-name: "kind-nightly-main", consul-version: "1.14-dev", kind-version: "v1.24.6" }
     with:
       name: ${{matrix.build-name}}
       directory: acceptance/tests
@@ -31,8 +32,8 @@ jobs:
       matrix:
         include:
           - { runner: "0", kind-version: "v1.23.0", consul-version: "1.11-dev", consul-k8s-tag: "v0.49.0"}
-         # - { runner: "1", kind-version: "v1.23.0", consul-version: "1.12-dev", consul-k8s-tag: "v0.49.0"}
-         # - { runner: "2", kind-version: "v1.23.0", consul-version: "1.13-dev", consul-k8s-tag: "v0.49.0"}
+          - { runner: "1", kind-version: "v1.23.0", consul-version: "1.12-dev", consul-k8s-tag: "v0.49.0"}
+          - { runner: "2", kind-version: "v1.23.0", consul-version: "1.13-dev", consul-k8s-tag: "v0.49.0"}
     with:
       name: acceptance
       directory: acceptance/tests
