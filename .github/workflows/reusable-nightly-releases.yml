@@ -178,7 +178,7 @@ jobs:
       directory: acceptance/tests
       go-version: ${{ needs.get-go-version.outputs.go-version }}
       additional-flags: ${{ inputs.additional-flags }}
-      gotestsum-version: ${{ inputs.gotestsum-version } }
+      gotestsum-version: ${{ inputs.gotestsum-version }}
       consul-k8s-image: docker.io/hashicorppreview/${{ github.event.repository.name }}-control-plane:${{ needs.get-product-version.outputs.product-version }}-${{ inputs.name }}-${{ github.sha }}
       kind-version: ${{ inputs.kind-version }}
       checkout-ref: ${{ inputs.checkout-ref }}
