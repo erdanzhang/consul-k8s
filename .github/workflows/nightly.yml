@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - { runner: "0", consul-k8s-branch: "v0.49.0", build-name: "kind-nightly-49", consul-version: "1.13-dev", kind-version: "v1.23.0" }
+          - { runner: "0", consul-k8s-branch: "release/0.49.x", build-name: "kind-nightly-49", consul-version: "1.13-dev", kind-version: "v1.23.0" }
 #          - { runner: "0", consul-k8s-branch: "main", build-name: "kind-nightly-main", consul-version: "1.14-dev", kind-version: "v1.24.6" }
     with:
       name: ${{matrix.build-name}}
@@ -26,22 +26,22 @@ jobs:
       DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
 
   ## CONSUL COMPATIBILITY
-  acceptance-consul-compatibility:
-    uses: ./.github/workflows/reusable-acceptance.yml
-    strategy:
-      matrix:
-        include:
-          - { runner: "0", kind-version: "v1.23.0", consul-version: "1.11-dev", consul-k8s-tag: "v0.49.0"}
-          - { runner: "1", kind-version: "v1.23.0", consul-version: "1.12-dev", consul-k8s-tag: "v0.49.0"}
-          - { runner: "2", kind-version: "v1.23.0", consul-version: "1.13-dev", consul-k8s-tag: "v0.49.0"}
-    with:
-      name: acceptance
-      directory: acceptance/tests
-      go-version: ${{ needs.get-go-version.outputs.go-version }}
-      additional-flags: "-use-kind -kubecontext=kind-dc1 -secondary-kubecontext=kind-dc2 -consul-image=hashicorppreview/consul-enterprise:${{ matrix.consul-version }}"
-      gotestsum-version: 1.8.2
-      consul-k8s-image: docker.io/hashicorp/consul-k8s-control-plane:0.49
-      kind-version: ${{ matrix.kind-version }}
-      checkout-ref: ${{ matrix.consul-k8s-tag }}
-    secrets:
-      CONSUL_ENT_LICENSE: ${{ secrets.CONSUL_ENT_LICENSE }}
+#  acceptance-consul-compatibility:
+#    uses: ./.github/workflows/reusable-acceptance.yml
+#    strategy:
+#      matrix:
+#        include:
+#          - { runner: "0", kind-version: "v1.23.0", consul-version: "1.11-dev", consul-k8s-tag: "v0.49.0"}
+#          - { runner: "1", kind-version: "v1.23.0", consul-version: "1.12-dev", consul-k8s-tag: "v0.49.0"}
+#          - { runner: "2", kind-version: "v1.23.0", consul-version: "1.13-dev", consul-k8s-tag: "v0.49.0"}
+#    with:
+#      name: acceptance
+#      directory: acceptance/tests
+#      go-version: ${{ needs.get-go-version.outputs.go-version }}
+#      additional-flags: "-use-kind -kubecontext=kind-dc1 -secondary-kubecontext=kind-dc2 -consul-image=hashicorppreview/consul-enterprise:${{ matrix.consul-version }}"
+#      gotestsum-version: 1.8.2
+#      consul-k8s-image: docker.io/hashicorp/consul-k8s-control-plane:0.49
+#      kind-version: ${{ matrix.kind-version }}
+#      checkout-ref: ${{ matrix.consul-k8s-tag }}
+#    secrets:
+#      CONSUL_ENT_LICENSE: ${{ secrets.CONSUL_ENT_LICENSE }}
