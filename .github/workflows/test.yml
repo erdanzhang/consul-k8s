@@ -366,7 +366,7 @@ jobs:
       directory: acceptance/tests
       go-version: ${{ needs.get-go-version.outputs.go-version }}
       additional-flags: "-use-kind -kubecontext=kind-dc1 -secondary-kubecontext=kind-dc2 -consul-image=hashicorppreview/consul-enterprise:1.14-dev"
-      gotestsum-version: ${{ env.GOTESTSUM_VERSION }}
+      gotestsum-version: 1.8.2
       consul-k8s-image: docker.io/hashicorppreview/${{ github.event.repository.name }}-control-plane:${{ needs.get-product-version.outputs.product-version }}-pr-${{ github.sha }}
     secrets:
       CONSUL_ENT_LICENSE: ${{ secrets.CONSUL_ENT_LICENSE }}
