@@ -360,7 +360,7 @@ jobs:
 #      CONSUL_ENT_LICENSE: ${{ secrets.CONSUL_ENT_LICENSE }}
 
   acceptance:
-    needs: [ get-product-version, dev-upload-docker ]
+    needs: [ get-product-version, dev-upload-docker, get-go-version ]
     uses: ./.github/workflows/reusable-acceptance.yml
     with:
       name: acceptance
